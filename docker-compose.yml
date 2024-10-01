@@ -1,0 +1,42 @@
+services:
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    restart: always
+    environment:
+      POSTGRES_DB: clicker
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ctf-clicker-server
+    depends_on:
+      - postgresql
+    restart: on-failure
+    ports:
+      - "8888:80"
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: postgresql
+      DB_PORT: 5432
+      DB_DATABASE: clicker
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+    command: >
+      bash -c "alembic upgrade head &&
+               fastapi run main.py --port 80"
