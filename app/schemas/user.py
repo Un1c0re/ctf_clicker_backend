@@ -17,3 +17,9 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class UserScore(BaseModel):
+    id: int
+    name: str
+    score: float

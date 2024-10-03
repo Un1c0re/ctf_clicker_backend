@@ -10,4 +10,4 @@ COPY . /code
 
 
 CMD ["alembic", "-c", "alembic.ini", "upgrade", "head"]
-CMD ["fastapi", "run", "main.py", "--port", "80"]
+CMD ["fastapi", "run", "app/main.py", "--port", "80"]

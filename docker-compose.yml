@@ -39,4 +39,4 @@ services:
       DB_PASSWORD: admin
     command: >
       bash -c "alembic upgrade head &&
-               fastapi run main.py --port 80"
+               fastapi run app/main.py --port 80"
