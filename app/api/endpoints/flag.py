@@ -1,7 +1,11 @@
 from fastapi import APIRouter
 
+from app.config import settings
+
 router = APIRouter()
+
 
 @router.get("/")
 async def root():
-    return {"flag": "surctf_12345678"}
+    flag = settings.flag
+    return {"flag": flag}
