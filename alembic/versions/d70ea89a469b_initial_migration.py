@@ -25,9 +25,6 @@ def upgrade() -> None:
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('name', sa.String(), nullable=False, server_default="dude"),
         sa.Column('wallet', sa.Float(), nullable=False, server_default="0"),
-        sa.Column('email', sa.String(), nullable=False, unique=True, index=True),
-        sa.Column('hashed_password', sa.String(), nullable=False),
-        sa.Column('is_active', sa.Boolean(), nullable=False, server_default=sa.text('true')),
     )
 
 
